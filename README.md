@@ -4,5 +4,5 @@
 > 시간이 걸리더라도 혹은 짧더라도 새로이 알게 된 내용은 모두 작성
  
 ### CKA
-- [Maintenance](https://github.com/imxsuu/TIL/blob/main/CKA/Maintenance.md)
+- [Cluster Maintenance](https://github.com/imxsuu/TIL/blob/main/CKA/Cluster_Maintenance.md)
 
