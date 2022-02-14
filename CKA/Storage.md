@@ -22,4 +22,9 @@
     2. 연결된 스토리지 자산을 수동으로 삭제한다.
     3. 동일한 스토리지 자산을 재사용하려는 경우, 동일한 스토리지 자산 정의로 새 pv을 생성한다.
 
+### 
+> keywords: #storageclass 
 
+- pv에서는 공간의 크기를 지정해줘야하는 단점이 있다. 이를 `Static Provisioning`이라고 한다. 
+
+- `Dynamic Provisioning`방식은 pvc를 선언하면 자동으로 관련된 pv와 그에 대응하는 Disk가 생성된다. `StorageClass`는 `Dynamic Provisioning`에 속한다. 
