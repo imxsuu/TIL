@@ -1,17 +1,17 @@
 
 # CKA Practice with KodeKloud
-## Maintenance - OS Upgrades
+## Cluster Maintenance - OS Upgrades
 > keywords: #drain #cordon #uncordon
 
 drain은 노드 관리를 위해 특정 노드에 있는 파드들을 다른 노드로 이동시키는 명령이다. 새로운 파드가 더이상 해당 노드에 스케줄링되지 않도록 설정하고, 기존에 실행중이던 파드들을 다른 노드들로 이동시킨다. 만약 단일 노드라면 파드들은 스케줄링되지 못하고 Pending 상태로 남아있게 된다. 해당 노드에 데몬셋으로 실행된 파드가 있으면 drain에 실패한다. 데몬셋으로 실행된 파드들은 삭제해도 데몬셋이 즉시 다시 실행시키기 때문이다. 이를 무시하고 진행하려면 `--ignore-daemonsets` 옵션을 준다. 
 
-```
+```bash
 kubectl drain $NODENAME --ignore-daemonsets
 ```
 
 해당 노드에 파드들을 다시 스케줄링하고 싶다면, uncordon 명령을 사용하여 활성화시킨다.
 
-```
+```bash
 kubectl uncordon $NODENAME
 ```
 
@@ -19,17 +19,17 @@ kubectl uncordon $NODENAME
 
 replicaset이 없는 싱글 파드는 drain 명령으로 다른 노드로 이동시킬 수 없다. 이때에는 `--force` 옵션을 주어 강제로 삭제한다. 이 경우에는 해당 파드는 클러스터에서 영원히 사라지게 된다.
 
-```
+```bash
 kubectl drain $NODENAME --force
 ```
 
 해당 싱글 파드가 사라져서는 안될 때에는 drain 명령이 아닌 cordon 명령을 사용한다. cordon 명령을 사용하면 해당 노드에서 실행되던 파드들은 유지하고 더 이상 스케줄링하지 않는다.
 
-```
+```bash
 kubectl cordon $NODENAME
 ```
 
-## Maintenance - Cluster upgrade process
+## Cluster Maintenance - Cluster upgrade process
 >keywords: #taints #kubeadm #kubelet
 
 ![kubernetes version](/assets/kubernetes-version.png)
@@ -41,25 +41,25 @@ kubectl cordon $NODENAME
 
 워크로드를 호스팅할 수 있는 노드의 갯수를 알아보기 위해서는 taints 되어있는 노드가 있는지 확인한다.
 
-```
+```bash 
 kubectl describe nodes | grep -i taints
 ```
 
 다운타임을 최소화하기 위해서는 클러스터를 한 번에 한 노드씩 업그레이드하면서 워크로드를 다른 노드로 이동한다. 업그레이드하려는 노드를 drain시킨 후 업그레이드를 진행한다. 업그레이드는 메이저버전의 경우 1단계씩 진행해야 한다. (1.17 -> 1.18 가능, 1.17 -> 1.20 불가능)
 
-```
+```bash
 kubectl drain $NODENAME --ignore-daemonsets --force
 ```
 
 현재 kubeadm에서 업그레이드가 가능한 버전이 무엇인지 알아본다.
 
-```
+```bash
 kubeadm upgrade plan
 ```
 
 노드의 업그레이드 방법과 순서는 다음과 같다.
 
-```
+```bash
 # 업그레이드하려는 노드 비활성화
 kubectl drain $NODENAME --ignore-daemonsets --force
 
@@ -83,10 +83,9 @@ systemctl restart kubelet
 
 # 업그레이드한 노드 활성화
 kubectl uncordon $NODENAME
-
 ```
 
-## Maintenance - Backup and restore methods
+## Cluster Maintenance - Backup and restore methods
 >keywords: #etcd #snapshot
 
 ![backup etcd](/assets/backup-etcd.png)
@@ -95,13 +94,13 @@ kubectl uncordon $NODENAME
 
 1. 현재 띄워져있는 모든 리소스를 yaml파일로 추출하여 저장한다.
 
-```
+```bash
 kubectl get all --all-namespaces -o yaml > all-deploy-services.yaml
 ```
 
 2. etcd를 백업하고 복구한다.
 
-```
+```bash
 # etcd 정보 확인
 kubectl describe pod etcd -n kube-system
 
