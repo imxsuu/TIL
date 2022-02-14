@@ -1,6 +1,5 @@
-
 # CKA Practice with KodeKloud
-## Cluster Maintenance - OS Upgrades
+### OS Upgrades
 > keywords: #drain #cordon #uncordon
 
 drain은 노드 관리를 위해 특정 노드에 있는 파드들을 다른 노드로 이동시키는 명령이다. 새로운 파드가 더이상 해당 노드에 스케줄링되지 않도록 설정하고, 기존에 실행중이던 파드들을 다른 노드들로 이동시킨다. 만약 단일 노드라면 파드들은 스케줄링되지 못하고 Pending 상태로 남아있게 된다. 해당 노드에 데몬셋으로 실행된 파드가 있으면 drain에 실패한다. 데몬셋으로 실행된 파드들은 삭제해도 데몬셋이 즉시 다시 실행시키기 때문이다. 이를 무시하고 진행하려면 `--ignore-daemonsets` 옵션을 준다. 
@@ -29,7 +28,7 @@ kubectl drain $NODENAME --force
 kubectl cordon $NODENAME
 ```
 
-## Cluster Maintenance - Cluster upgrade process
+### Cluster Upgrade Process
 >keywords: #taints #kubeadm #kubelet
 
 ![kubernetes version](/assets/kubernetes-version.png)
@@ -85,7 +84,7 @@ systemctl restart kubelet
 kubectl uncordon $NODENAME
 ```
 
-## Cluster Maintenance - Backup and restore methods
+### Backup and Restore Methods
 >keywords: #etcd #snapshot
 
 ![backup etcd](/assets/backup-etcd.png)
