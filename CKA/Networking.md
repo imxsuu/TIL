@@ -28,11 +28,25 @@
     ```
 
 ### CNI Weave
-> keywords: #
+> keywords: #cni #weave
 
 - kubelet에 관련된 정보 확인
     ```bash
     ps -aux | grep kubelet
     ```
 
-- 모든 CNI 관련 파일들은 `/opt/cni/bin` 경로에 위치한다.
+- 모든 CNI 관련 파일들은 `/opt/cni/bin` 경로에 위치
+
+- CNI 관련 bridge 정보는 `/etc/cni/net.d` 경로에 위치
+
+### Service Networking
+> keywords: #kube-proxy #daemonsets
+
+- 노드의 IP 대역은 `ip addr` 명령을 통해 eth0 정보 확인
+
+- 파드의 IP 대역은 CNI를 통해서 확인
+    - kube-system에 떠있는 CNI 관련 파드의 로그 확인
+    - `ipalloc-range`가 파드가 할당되는 IP 대역
+
+### Coredns in Kubernetes
+> keywords: 
