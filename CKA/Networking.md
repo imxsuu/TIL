@@ -58,3 +58,29 @@
 - 기본적으로 kube-dns라는 이름으로 서비스가 배포되고, 이 서비스의 주소가 파드에 nameserver로 구성
 
 - kubelet config file을 보면 DNS 서버 주소 확인 가능 `/var/lib/kubelet/config.yaml`
+
+### Ingress Networking
+> keywords: #ingress #service
+
+- Ingress는 쿠버네티스에 빌트인된 7계층 로드밸런서
+
+- 하나의 외부 URL을 이용해 클러스터 내 다른 서비스로 라우팅, SSL Security 가능
+
+- Ingress를 사용하기 위해서는 `Ingress Controller`가 필수적
+    - istio, nginx, haproxy, traefik 등... 하나를 선택하여 배포 (빌트인되어있지않음)
+    - configmap을 생성하여 keep-alive threshold, ssl setting, session timeout 등을 설정
+
+- Ingress Controller에서 사용하기 위해 설정하는 Rules와 Configuration들은 `Ingress Resources`
+    - URL을 기반으로 각 `Service`마다 라우팅 패스를 다르게 설정 가능
+
+
+- `Ingress Controller`를 외부로 노출하기 위해 `Service`를 정의하고 `label-selector`를 통해 링크
+
+- Ingress는 클러스터를 모니터링하는 기능을 갖고 있고 이를 위해 `ServiceAccount`가 필요
+
+- ServiceAccount에는 퍼미션 권한이 필요하고 이를 위해 `Roles`와 `RolesBinding`이 필요
+
+- 정리하자면, Ingress를 위해서 최소한으로 Deployment, Service, Configmap, Auth(ServiceAccount)가 필요
+
+- Ingress로 들어온 요청은 다이렉트로 파드에게 가지않고 `Service`로 전달
+
