@@ -49,4 +49,12 @@
     - `ipalloc-range`가 파드가 할당되는 IP 대역
 
 ### Coredns in Kubernetes
-> keywords: 
+> keywords: #coredns #configmap
+
+- CoreDNS 설정은 `/etc/coredns/Corefile`에 정의
+
+- Corefile은 파드에 configmap으로 전달
+
+- 기본적으로 kube-dns라는 이름으로 서비스가 배포되고, 이 서비스의 주소가 파드에 nameserver로 구성
+
+- kubelet config file을 보면 DNS 서버 주소 확인 가능 `/var/lib/kubelet/config.yaml`
