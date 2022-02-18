@@ -1,6 +1,6 @@
 # CKA Practice with KodeKloud
 ### Installation using Kubeadm
-> keywords:
+> keywords: #kubeadm #kubelet 
 
 - kubeadm init을 통해 클러스터를 만들고 난 후 빼먹지 말고 꼭 실행
     ```bash

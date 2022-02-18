@@ -8,3 +8,4 @@
 - [Storage](https://github.com/imxsuu/TIL/blob/main/CKA/Storage.md)
 - [Networking](https://github.com/imxsuu/TIL/blob/main/CKA/Networking.md)
 - [Install](https://github.com/imxsuu/TIL/blob/main/CKA/Install.md)
+- [Troubleshooting](https://github.com/imxsuu/TIL/blob/main/CKA/Troubleshooting.md)
