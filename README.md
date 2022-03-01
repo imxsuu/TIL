@@ -11,3 +11,4 @@
 - [Troubleshooting](https://github.com/imxsuu/TIL/blob/main/CKA/Troubleshooting.md)
 - [Mock Exam - 1](https://github.com/imxsuu/TIL/blob/main/CKA/Mock_Exam_1.md)
 - [Mock Exam - 2](https://github.com/imxsuu/TIL/blob/main/CKA/Mock_Exam_2.md)
+- [Mock Exam - 3](https://github.com/imxsuu/TIL/blob/main/CKA/Mock_Exam_3.md)
